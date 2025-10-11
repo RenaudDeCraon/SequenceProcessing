@@ -9,6 +9,7 @@ import java.util.Random;
 
 import ComputationalGraph.Function.Softmax;
 import ComputationalGraph.Node.ComputationalNode;
+import ComputationalGraph.Node.ConcatenatedNode;
 import ComputationalGraph.Node.MultiplicationNode;
 import Math.*;
 import SequenceProcessing.Functions.RemoveBias;
@@ -100,10 +101,10 @@ public class RecurrentNeuralNetworkModel extends ComputationalGraph implements S
                 newOldLayers.add(aFunction);
             }
             currentOldLayers = (ArrayList<ComputationalNode>) newOldLayers.clone();
-            ComputationalNode output = this.addEdge(current, weights.get(weights.size() - 1), false);
-            outputNodes.add(this.addEdge(output, new Softmax(), false));
+            outputNodes.add(this.addEdge(current, weights.get(weights.size() - 1), false));
         }
-        this.concatEdges(outputNodes, 0);
+        ConcatenatedNode concatenatedNode = (ConcatenatedNode) this.concatEdges(outputNodes, 0);
+        this.addEdge(concatenatedNode, new Softmax(), false);
         // Training
         for (int i = 0; i < parameters.getEpoch(); i++) {
             System.out.println("Epoch: " + (i + 1));
