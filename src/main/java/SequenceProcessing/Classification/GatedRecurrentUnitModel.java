@@ -80,7 +80,7 @@ public class GatedRecurrentUnitModel extends RecurrentNeuralNetworkModel impleme
                 current = aFunction;
                 newOldLayers.add(aFunction);
             }
-            currentOldLayers = (ArrayList<ComputationalNode>) newOldLayers.clone();
+            currentOldLayers = newOldLayers;
             ComputationalNode node = this.addEdge(current, weights.get(weights.size() - 1), false);
             outputNodes.add(this.addEdge(node, switches.get(k), false));
         }

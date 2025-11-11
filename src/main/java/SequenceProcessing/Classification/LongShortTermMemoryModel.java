@@ -86,8 +86,8 @@ public class LongShortTermMemoryModel extends RecurrentNeuralNetworkModel implem
                 newOldLayers.add(aFunction);
                 newOldCValues.add(ct);
             }
-            currentOldLayers = (ArrayList<ComputationalNode>) newOldLayers.clone();
-            currentOldCValues = (ArrayList<ComputationalNode>) newOldCValues.clone();
+            currentOldLayers = newOldLayers;
+            currentOldCValues = newOldCValues;
             ComputationalNode node = this.addEdge(current, weights.get(weights.size() - 1), false);
             outputNodes.add(this.addEdge(node, switches.get(k), false));
         }
