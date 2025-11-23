@@ -22,9 +22,9 @@ public class Transformer extends ComputationalGraph implements Serializable {
     public Transformer(VectorizedDictionary dictionary) {
         this.dictionary = dictionary;
         for (int k = 0; k < this.dictionary.size(); k++) {
-            if (this.dictionary.getWord(k).getName().equals("<SOS>")) {
+            if (this.dictionary.getWord(k).getName().equals("<S>")) {
                 this.startIndex = k;
-            } else if (this.dictionary.getWord(k).getName().equals("<EOS>")) {
+            } else if (this.dictionary.getWord(k).getName().equals("</S>")) {
                 this.endIndex = k;
             }
         }
