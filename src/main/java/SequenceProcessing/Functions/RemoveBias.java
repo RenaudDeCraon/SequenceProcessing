@@ -3,6 +3,8 @@ package SequenceProcessing.Functions;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import ComputationalGraph.Node.ComputationalNode;
+import ComputationalGraph.Node.FunctionNode;
 import Math.Tensor;
 
 public class RemoveBias implements ComputationalGraph.Function.Function, Serializable {
@@ -22,5 +24,12 @@ public class RemoveBias implements ComputationalGraph.Function.Function, Seriali
         ArrayList<Double> newValues = new ArrayList<>(values);
         newValues.add(0.0);
         return new Tensor(newValues, new int[]{1, newValues.size()});
+    }
+
+    @Override
+    public ComputationalNode addEdge(ArrayList<ComputationalNode> inputNodes, boolean isBiased) {
+        ComputationalNode newNode = new FunctionNode(isBiased, this);
+        inputNodes.get(0).add(newNode);
+        return newNode;
     }
 }

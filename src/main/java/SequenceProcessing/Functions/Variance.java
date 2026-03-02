@@ -1,6 +1,8 @@
 package SequenceProcessing.Functions;
 
 import ComputationalGraph.Function.Function;
+import ComputationalGraph.Node.ComputationalNode;
+import ComputationalGraph.Node.FunctionNode;
 import Math.Tensor;
 
 import java.io.Serializable;
@@ -36,5 +38,12 @@ public class Variance implements Function, Serializable {
             }
         }
         return backward.hadamardProduct(new Tensor(values, tensor.getShape()));
+    }
+
+    @Override
+    public ComputationalNode addEdge(ArrayList<ComputationalNode> inputNodes, boolean isBiased) {
+        ComputationalNode newNode = new FunctionNode(isBiased, this);
+        inputNodes.get(0).add(newNode);
+        return newNode;
     }
 }
